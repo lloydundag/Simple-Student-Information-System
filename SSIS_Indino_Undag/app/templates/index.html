@@ -1,0 +1,98 @@
+{%- extends "layouts/master_layout.html" %}
+
+{# Lloyd Kayle L. Undag and Jolandex Indino #}
+{# CSC 181 • SSIS #}
+{# Initial Commit #}
+
+
+{% import "bootstrap/utils.html" as utils %}
+{% block content %}
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page"></li>
+            </ol>
+        </nav>
+        <div class="row">
+            
+
+        </div>
+        
+        <div class="row mt-2">
+            <div class="col text-right">
+                <span class="float-right"><a href="{{ url_for('.register') }}" class="btn btn-primary">Enroll a Student</a></span>
+            </div>
+            <br>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ID Number</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Action</th>
+                </tr>
+	            </thead>
+	            <tbody>
+		        {% for user in data %}
+		            <tr>
+			            <td>{{user[0]}}</td>
+			            <td>{{user[1]}}</td>
+			            <td>{{user[2]}}</td>
+			            <td>{{user[3]}}</td>
+                        <td>
+                            <button href = "/read/{{user[0]}}" class="btn btn-primary" data-toggle="modal" data-target="#modalread{{user[0]}}">Details</button> 
+                            <button class="btn btn-warning">Edit</button> 
+                            <button class="btn btn-danger btn-delete" data-id="{{ user[0]}}">Delete</button>
+                        </td>
+		            </tr>
+		        
+	            </tbody>
+
+                <div id="modalread{{user[0]}}" class="modal fade" style="font-color:black" role="dialog">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class = "modal-header">
+      
+                          <h4 class="modal-title" style="color:black"> {{user[2]}} {{user[3]}} </h4>
+                        </div>
+                      <div class="modal-body">
+        
+                        <form action="{{url_for('user.index')}}" method="POST">
+                            <div class="form-group" align="center">
+                          <p><b>ID:</b>&ensp;{{user[0]}} </p>
+                          <p><b>ID Number:</b>&ensp;{{user[1]}} </p>
+                          <p><b>First Name:</b>&ensp;{{user[2]}} </p>
+                          <p><b>Last Name:</b>&ensp; {{user[3]}}</p>
+                          <p><b>College:</b>&ensp; {{user[4]}}</p>
+                          <p><b>Course:</b>&ensp;{{user[5]}} </p>
+                          <p><b>Year Level:</b>&ensp; {{user[6]}} </p>
+                          <p><b>Gender:</b>&ensp; {{user[7]}} </p>
+                          <p><b>Email:</b>&ensp; {{user[8]}} </p>
+                           <p><b>Password:</b>&ensp; {{user[9]}} </p>
+                          </div>
+
+                        </form>
+      
+                      <div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+      
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      
+                  {% endfor %}
+
+            </table>
+        </div>
+    </div>
+{%- endblock %}
+{% block scripts%}
+{{super()}}
+<script>
+    var url = "{{ url_for('.delete') }}";
+</script>
+<script src="{{ url_for('static',filename='js/index.js')}}"></script>
+{% endblock %}
