@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask-mysql = "*"
+flask-mysql-connector = "*"
+flask-bootstrap = "*"
+flask-wtf = "*"
+python-dotenv = "*"
+flask-reuploaded = "*"
+flask-weasyprint = "*"
+pypdf2 = "*"
+reportlab = "*"
+setuptools = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
