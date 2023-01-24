@@ -1,0 +1,249 @@
+{%- extends "layouts/master_layout.html" %}
+{# Lloyd Kayle L. Undag and Jolandex Indino #}
+{# CSC 181 • SSIS #}
+{# Initial Commit #}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+{% import "bootstrap/utils.html" as utils %}
+{% block content %}
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page"></li>
+            </ol>
+        </nav>
+        <div class="row">
+
+      <center>
+      <tit><b> MABABANG PAARALAN NG DOWN UNDER </b><tit>
+      </center>
+        </div>
+        
+        <div class="row mt-2">
+            <div class="col text-right">
+                
+                <span class="float-right"><a href="{{ url_for('.register') }}" class="btn btn-primary">Enroll a Student</a></span>
+                
+              </div>
+              <br>
+              <div class="search-box">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5>Search All Fields</h5>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Search for a record">
+                    </div> 
+                </div>
+            </div>
+          <div id="result"></div>
+          </div>
+            <br>
+            <br>
+            <table class="table align-center">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ID Number</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Action</th>
+                </tr>
+	            </thead>
+	            <tbody>
+		        {% for user in data %}
+		            <tr>
+			            <td>{{user[0]}}</td>
+			            <td>{{user[1]}}</td>
+			            <td>{{user[2]}}</td>
+			            <td>{{user[3]}}</td>
+                        <td>
+                            <button href = "/read/{{user[0]}}" class="btn btn-primary" data-toggle="modal" data-target="#modalread{{user[0]}}">Details</button> 
+                            <button href = "/edit/{{user[0]}}" class="btn btn-warning" data-toggle="modal" data-target="#modaledit{{user[0]}}">Edit</button> 
+                            <button class="btn btn-danger btn-delete" data-id="{{user[0]}}">Delete</button>
+                        </td>
+		            </tr>
+		        
+	            </tbody>
+
+                <div id="modalread{{user[0]}}" class="modal fade" style="font-color:black" role="dialog">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class = "modal-header">
+      
+                          <h4 class="modal-title" style="color:black"> {{user[2]}} {{user[3]}} </h4>
+                        </div>
+                      <div class="modal-body">
+        
+                          <div class="form-group" align="center">
+                          <br>
+                          <img class="user-image" src="{{ url_for('static', filename='/uploads/'+user[7]) }}">
+                          <br>
+                          <p><b>ID Number:</b>&ensp;{{user[0]}} </p>
+                          <p><b>First Name:</b>&ensp;{{user[1]}} </p>
+                          <p><b>Last Name:</b>&ensp; {{user[2]}}</p>
+                          <p><b>College:</b>&ensp; {{user[3]}}</p>
+                          <p><b>Course:</b>&ensp;{{user[4]}} </p>
+                          <p><b>Year Level:</b>&ensp; {{user[5]}} </p>
+                          <p><b>Gender:</b>&ensp; {{user[6]}} </p>
+                          </div>
+                      <div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+      
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      
+                  {% endfor %} 
+            </table>
+            {% for user in data %}
+            <div id="modaledit{{user[0]}}" class="modal fade" role="dialog" style="font-color:black">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class = "modal-header">
+
+                    <h4 class="modal-title"> Update Information </h4>
+                  </div>
+
+                  <div class="modal-body">
+
+                    <form action="/user/edit" method="put" class="form" enctype="multipart/form-data" role="form">
+
+                    <div class="form-group" align="center">
+                      <br>
+                      <div id="wrapper">
+                        <img src="{{ url_for('static', filename='/uploads/'+user[7]) }}" class="user-image" id="editpic">
+                      </div>                      
+                      <br>
+                      <label for="idnum">ID Number</label>
+                      <input type ="text" class="form-control" name="idnum" value="{{user[0]}}">
+                      <br>
+                      <label for="firstname">First Name</label>
+                      <input type ="text" class="form-control" name="firstname" value="{{user[1]}}">
+                      <br>
+                      <label for="lastname">Last Name</label>
+                      <input type ="text" class="form-control" name="lastname" value="{{user[2]}}">
+                      <br>
+                      <label for="College">College</label>
+                      <input type="hidden" class="form-control" name="college" value="{{user[3]}}">
+                      <select id="college" name="college">
+                        <option value="{{user[3]}}"> {{user[3]}}</option>
+                        <option value="College of Science and Mathematics">CSM</option>
+                        <option value="College of Economics, Business, and Accountancy">CEBA</option>
+                        <option value="College of Education">CED</option>
+                        <option value="College of Nursing">CON</option>
+                        <option value="College of Arts and Sciences">CASS</option>
+                        <option value="College of Computer Studies">CCS</option>
+                        <option value="College of Engineering and Technology">COET</option>
+                        </select>
+
+                        
+                      <br>
+                      <br>
+                      <label for="course">Course</label>
+                      <input type="hidden" class="form-control" name="course" value="{{user[4]}}">
+                      <select id="course" name="course">
+                        <option value="{{user[4]}}"> {{user[4]}}</option>
+                        <option value="Bachelor of Arts in English"> (CASS) AB English</option>
+                        <option value="Bachelor of Science in Psychology"> (CASS) BS Psych</option>
+                        <option value="Bachelor of Arts in Filipino">(CASS) AB Filipino</option>
+                        <option value="Bachelor of Arts in History"> (CASS) AB History</option>
+                        <option value="Bachelor of Arts in Political Science"> (CASS) AB Pol Sci</option>
+                        <option value="Bachelor of Science in Civil Engineering"> (COET) BSCE</option>
+                        <option value="Bachelor of Science in Ceramics Engineering"> (COET) BSCerE</option>
+                        <option value="Bachelor of Science in Chemical Engineering"> (COET) BSChE</option>
+                        <option value="Bachelor of Science in Computer Engineering"> (COET) BSCompE</option>
+                        <option value="Bachelor of Science in Electrical Engineering"> (COET) BSEE</option>
+                        <option value="Bachelor of Science in Mining Eng'g."> (COET) BSMinE</option>
+                        <option value="Bachelor of Science in METALLURGICAL ENGINEERING"> (COET) BSMetE</option>
+                        <option value="Bachelor of Science in Biology (Botany)"> (CSM) BS Bio-Botany</option>
+                        <option value="Bachelor of Science in Biology (Zoology)"> (CSM) BS Bio-Zoo</option>
+                        <option value="Bachelor of Science in Biology (Animal)"> (CSM) BS Bio-AnimalBio</option>
+                        <option value="Bachelor of Science in Statistics"> (CSM) BS Stat</option>
+                        <option value="Bachelor of Science in Chemistry"> (CSM) BS Chem</option>
+                        <option value="Bachelor of Science in Physics"> (CSM) BS Physics</option>
+                        <option value="Bachelor of Science in Mathematics"> (CSM) BS Math</option>
+                        <option value="Bachelor of Science in Accountancy"> (CEBA) BSA</option>
+                        <option value="Bachelor of Science in Business Administration (Economics)"> (CEBA) BSBA - Econ</option>
+                        <option value="Bachelor of Science in Business Administration (Business Economics)"> (CEBA) BSBA - Bus Econ</option>
+                        <option value="Bachelor of Science in Hotel and Management"> (CEBA) BS HRM</option>
+                        <option value="Bachelor of Science in Information Technology"> (CCS) BSIT</option>
+                        <option value="Bachelor of Science in Information Systems"> (CCS) BSIS</option>
+                        <option value="Bachelor of Science in Computer Science"> (CCS) BSCS</option>
+                        <option value="Bachelor of Science in Nursing"> (CON) BSN</option>
+                        <option value="Bachelor of Secondary Education (Mathematics)"> (CED) BSED - Math</option>
+                        <option value="Bachelor of Elementary Education (English)"> (CED) BSED - English</option>
+                        <option value="Bachelor of Elementary Education(FILIPINO)"> (CED) BSED - Filipino</option>
+                        <option value="Bachelor of Secondary Education (PHYSICS)"> (CED) BSED - PhySci</option>
+                        <option value="Bachelor of Secondary Education (MAPEH)"> (CED) BSED - MAPEH</option>
+                        <option value="Bachelor of Secondary Education (TLE)"> (CED) BSED - TLE</option>
+                        </select>    
+
+                        <br>
+                        <br>
+                        <label for="yearlevel">Year Level</label>
+                        <input type="hidden" class="form-control" name="yearlevel" value="{{user[5]}}">
+                        <select id="yearlevel" name="yearlevel">
+                            <option type="hidden" value="{{user[5]}}" selected>{{user[5]}}</option>
+                            <option value="First Year">First Year</option>
+                            <option value="Second Year">Second Year</option>
+                            <option value="Third Year">Third Year</option>
+                            <option value="Fourth Year">Fourth Year</option>
+                            </select>
+
+                        <br>
+                        <br>
+                        <label for="gender">Gender</label>
+                        <input type="hidden" class="form-control" name="gender" value="{{user[6]}}">
+                        <select id="gender" name="gender">
+                          <option value="{{user[6]}}" selected>{{user[6]}}</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="LGBTQ+">LGBTQ+</option>
+                          </select>
+
+                      <br>
+                      <br>
+                      <input class="btn btn-default" id="submit" name="submit" type="submit" value="Submit">
+                    </div>
+
+
+                    <div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button> 
+                        
+                        
+                      </div>
+                  </div>
+                  </form>
+
+                
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+    </div>
+{%- endblock %}
+{% block scripts%}
+{{super()}}
+<script>
+    var url = "{{ url_for('.delete') }}";
+</script>
+<script src="{{ url_for('static',filename='js/index.js')}}"></script>
+
+
+
+{% endblock %}
