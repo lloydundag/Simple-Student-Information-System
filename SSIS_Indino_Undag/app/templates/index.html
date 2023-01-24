@@ -1,8 +1,11 @@
 {%- extends "layouts/master_layout.html" %}
-
 {# Lloyd Kayle L. Undag and Jolandex Indino #}
 {# CSC 181 • SSIS #}
 {# Initial Commit #}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
 {% import "bootstrap/utils.html" as utils %}
@@ -11,25 +14,81 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page"></li>
+                <a href="/User1">User</a>'
+                <a href="/User2">User</a>
+                <a href="/User3">User</a>'
             </ol>
         </nav>
         <div class="row">
-            
 
+      <center>
+      <tit><b> MABABANG PAARALAN NG DOWN UNDER </b><tit>
+
+
+        <p>This one is for the boys</p>
+      </center>
         </div>
         
-        <div class="row mt-2">
+        <div class="row">
             <div class="col text-right">
+                
                 <span class="float-right"><a href="{{ url_for('.register') }}" class="btn btn-primary">Enroll a Student</a></span>
+                
+              </div>
+              <br>
+                    
+            
+            {% with messages = get_flashed_messages() %}
+            <div class="message">
+              {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                <li>{{ message }} <span class="close-btn" onclick="this.parentElement.remove()">✕</span></li>
+                {% endfor %}
+                </ul>
+              {% endif %}
             </div>
+            {% endwith %}
+          </div>
+          <div id="form-container">
+          <form method="get" action="/search" class="form-inline">
+                {% if search_items['query'] == None or search_items['query'] == '' %}
+                  <input class="form-control search" type="text" name="query" placeholder="Search student...">
+                {% else %}
+                  <input class="form-control search" type="text" name="query" value="{{search_items['query']}}">
+                {% endif %}
+                <select class="form-control" name="college" id="college">
+                    <option value="" disabled selected>Filter by college</option>
+                    {% for college in form.college.choices %}
+                      {% if search_items['college'] == college[1] %}
+                        <option value= "{{college[1]}}" selected>{{college[1]}}</option>  
+                      {% else %}
+                      <option value= "{{college[1]}}">{{college[1]}}</option>
+                      {% endif %}
+                    {% endfor %}
+                </select>
+                <select class="form-control" name="course" id="course">
+                    <option value="" disabled selected>Filter by course</option>
+                    {% for course in form.course.choices %}
+                      {% if search_items['course'] == course[1] %}
+                        <option value= "{{course[1]}}" selected>{{course[1]}}</option>  
+                      {% else %}
+                        <option value= "{{course[1]}}">{{course[1]}}</option>
+                      {% endif %}
+                    {% endfor %}
+                </select>
+                <button class="form-control" type="submit">Search</button>
+          </form>
+        </div>
+
             <br>
-            <table class="table">
+            <table class="table align-center">
                 <thead>
                 <tr>
-                    <th>ID</th>
                     <th>ID Number</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Full Name</th>
+                    <th>College</th>
+                    <th>Course</th>
                     <th>Action</th>
                 </tr>
 	            </thead>
@@ -37,13 +96,13 @@
 		        {% for user in data %}
 		            <tr>
 			            <td>{{user[0]}}</td>
-			            <td>{{user[1]}}</td>
-			            <td>{{user[2]}}</td>
-			            <td>{{user[3]}}</td>
+			            <td>{{user[1]}} {{user[2]}}</td>
+			            <td>{{user[9]}}</td>
+			            <td>{{user[7]}}</td>
                         <td>
-                            <button href = "/read/{{user[0]}}" class="btn btn-primary" data-toggle="modal" data-target="#modalread{{user[0]}}">Details</button> 
-                            <button class="btn btn-warning">Edit</button> 
-                            <button class="btn btn-danger btn-delete" data-id="{{ user[0]}}">Delete</button>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modalread{{user[0]}}">Details</button> 
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#modaledit{{user[0]}}">Edit</button> 
+                            <button class="btn btn-danger btn-delete" data-id="{{user[0]}}">Delete</button>
                         </td>
 		            </tr>
 		        
@@ -54,28 +113,25 @@
                       <div class="modal-content">
                         <div class = "modal-header">
       
-                          <h4 class="modal-title" style="color:black"> {{user[2]}} {{user[3]}} </h4>
+                          <h4 class="modal-title" style="color:black"> {{user[1]}} {{user[2]}} </h4>
                         </div>
                       <div class="modal-body">
         
-                        <form action="{{url_for('user.index')}}" method="POST">
-                            <div class="form-group" align="center">
-                          <p><b>ID:</b>&ensp;{{user[0]}} </p>
-                          <p><b>ID Number:</b>&ensp;{{user[1]}} </p>
-                          <p><b>First Name:</b>&ensp;{{user[2]}} </p>
-                          <p><b>Last Name:</b>&ensp; {{user[3]}}</p>
-                          <p><b>College:</b>&ensp; {{user[4]}}</p>
-                          <p><b>Course:</b>&ensp;{{user[5]}} </p>
-                          <p><b>Year Level:</b>&ensp; {{user[6]}} </p>
-                          <p><b>Gender:</b>&ensp; {{user[7]}} </p>
-                          <p><b>Email:</b>&ensp; {{user[8]}} </p>
-                           <p><b>Password:</b>&ensp; {{user[9]}} </p>
+                          <div class="form-group" align="center">
+                          <br>
+                          <img class="user-image" src="{{ url_for('static', filename='/uploads/'+user[5]) }}">
+                          <br>
+                          <p><b>ID Number:</b>&ensp;{{user[0]}} </p>
+                          <p><b>First Name:</b>&ensp;{{user[1]}} </p>
+                          <p><b>Last Name:</b>&ensp; {{user[2]}}</p>
+                          <p><b>College:</b>&ensp; {{user[9]}}</p>
+                          <p><b>Course:</b>&ensp;{{user[7]}} </p>
+                          <p><b>Year Level:</b>&ensp; {{user[3]}} </p>
+                          <p><b>Gender:</b>&ensp; {{user[4]}} </p>
                           </div>
-
-                        </form>
-      
                       <div>
                         <div class="modal-footer">
+                          <a href="/{{user[0]}}.pdf" type="button" class="btn btn-primary" >Download</a> 
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
       
                         </div>
@@ -83,9 +139,108 @@
                     </div>
                   </div>
       
-                  {% endfor %}
-
+                  {% endfor %} 
             </table>
+            {% for user in data %}
+            <div id="modaledit{{user[0]}}" class="modal fade" role="dialog" style="font-color:black">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class = "modal-header">
+
+                    <h4 class="modal-title"> Update Information </h4>
+                  </div>
+
+                  <div class="modal-body">
+
+                    <form action="/student/{{user[0]}}/edit" method="post" class="form" enctype="multipart/form-data" role="form">
+
+                    <div class="form-group" align="center">
+                      <br>
+                      <div id="wrapper">
+                        <img src="{{ url_for('static', filename='/uploads/'+user[5]) }}" class="user-image" id="editpic">
+                        <input type="file" name="image" id="image" style="display:none">
+                      </div>                      
+                      <br>
+                      <label for="firstname">First Name</label>
+                      <input type ="text" class="form-control" name="firstname" value="{{user[1]}}">
+                      <br>
+                      <label for="lastname">Last Name</label>
+                      <input type ="text" class="form-control" name="lastname" value="{{user[2]}}">
+                      <br>
+                      <label for="college">College</label>
+                        <select id="college" name="college">
+                          {% for college in form.college.choices %}
+                            {% if college[1] == user[9]%}
+                              <option value="{{college[0]}}" selected>{{college[1]}}</option>
+                            {% else %}
+                              <option value="{{college[0]}}">{{college[1]}}</option>
+                            {% endif %}
+                          {% endfor %}
+                          </select>
+                      <br>
+                      <br>
+                      <label for="course">Course</label>
+                        <select id="course" name="course">
+                          {% for course in form.course.choices %}
+                            {% if course[1] == user[7]%}
+                              <option value="{{course[0]}}" selected>{{course[1]}}</option>
+                            {% else %}
+                              <option value="{{course[0]}}">{{course[1]}}</option>
+                            {% endif %}
+                          {% endfor %}
+                          </select>
+                      <br>
+                      <br>
+                      <label for="yearlevel">Year Level</label>
+                        <select id="yearlevel" name="yearlevel">
+                          {% for yl in form.yearlevel.choices %}
+                            {% if yl[1] == user[3]%}
+                              <option value="{{yl[0]}}" selected>{{yl[1]}}</option>
+                            {% else %}
+                              <option value="{{yl[0]}}">{{yl[1]}}</option>
+                            {% endif %}
+                          {% endfor %}
+                          </select>
+
+                        <br>
+                        <br>
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender">
+                          {% for gender in form.gender.choices %}
+                            {% if gender[1] == user[4]%}
+                              <option value="{{gender[0]}}" selected>{{gender[1]}}</option>
+                            {% else %}
+                              <option value="{{gender[0]}}">{{gender[1]}}</option>
+                            {% endif %}
+                          {% endfor %}
+                          </select>
+
+                      <br>
+                      <br>
+                      <input class="btn btn-default" id="submit" name="submit" type="submit" value="Update"></input>
+                    </div>
+
+
+                    <div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button> 
+                        
+                        
+                      </div>
+                  </div>
+                  </form>
+
+                
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+
+
+            {% endfor %}
+
+
         </div>
     </div>
 {%- endblock %}
@@ -95,4 +250,7 @@
     var url = "{{ url_for('.delete') }}";
 </script>
 <script src="{{ url_for('static',filename='js/index.js')}}"></script>
+
+
+
 {% endblock %}
