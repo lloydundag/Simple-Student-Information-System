@@ -25,3 +25,24 @@ $(function () {
         
         
 });
+
+
+const wrapper = document.getElementById("wrapper");
+const imageInput = document.getElementById("image");
+const editpic = document.getElementById("editpic");
+
+wrapper.addEventListener("click", function() {
+  imageInput.click();
+});
+
+imageInput.addEventListener("change", function() {
+  if (this.files && this.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        editpic.src = e.target.result;
+    }
+
+    reader.readAsDataURL(this.files[0]);
+  }
+});
