@@ -11,8 +11,9 @@
         </nav>
         <div class="row">
             <div class="col">
-                {{ wtf.quick_form(form, url_for('.register'), "post")}}
+                {{ wtf.quick_form(form, url_for('.register'), "post", enctype="multipart/form-data", id="enrollform")}}
             </div>
         </div>
 </div>
+<script src="{{ url_for('static',filename='js/signup.js')}}"></script>
 {%- endblock %}
