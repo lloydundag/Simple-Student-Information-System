@@ -7,37 +7,19 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
 {% import "bootstrap/utils.html" as utils %}
 {% block content %}
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"></li>
-                <a href="/User1">User</a>'
-                <a href="/User2">User</a>
-                <a href="/User3">User</a>'
-            </ol>
-        </nav>
-        <div class="row">
-
-      <center>
-      <tit><b> MABABANG PAARALAN NG DOWN UNDER </b><tit>
-
-
-        <p>This one is for the boys</p>
-      </center>
-        </div>
-        
-        <div class="row">
-            <div class="col text-right">
-                
-                <span class="float-right"><a href="{{ url_for('.register') }}" class="btn btn-primary">Enroll a Student</a></span>
-                
+    
+<img src="{{url_for('static', filename='icon/bg1.png')}}" style="width:100%">
+<br>
+<br>
+<br>
+              <div align="center">
+              <span class="float-center"><a href="{{ url_for('.register') }}" class="button"><b>Enroll a Student</b></a></span>  
               </div>
-              <br>
-                    
-            
+
+            <div class="container">
+              <div class="col">
             {% with messages = get_flashed_messages() %}
             <div class="message">
               {% if messages %}
@@ -59,6 +41,8 @@
                 {% endif %}
                 <select class="form-control" name="college" id="college">
                     <option value="" disabled selected>Filter by college</option>
+                    <br>
+                    <br>
                     {% for college in form.college.choices %}
                       {% if search_items['college'] == college[1] %}
                         <option value= "{{college[1]}}" selected>{{college[1]}}</option>  
@@ -67,6 +51,8 @@
                       {% endif %}
                     {% endfor %}
                 </select>
+                <br>
+                <br>
                 <select class="form-control" name="course" id="course">
                     <option value="" disabled selected>Filter by course</option>
                     {% for course in form.course.choices %}
@@ -80,6 +66,7 @@
                 <button class="form-control" type="submit">Search</button>
           </form>
         </div>
+       <br>
 
             <br>
             <table class="table align-center">
@@ -251,6 +238,11 @@
 </script>
 <script src="{{ url_for('static',filename='js/index.js')}}"></script>
 
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 {% endblock %}
