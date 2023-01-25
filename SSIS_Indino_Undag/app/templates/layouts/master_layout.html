@@ -1,7 +1,7 @@
 {%- extends "bootstrap/base.html" %}
 {% block title %}{{ title }}{% endblock %}
+
 {% block metas %}
-<meta name="csrf-token" content="{{ csrf_token() }}">
 {% endblock %}
 {% block head %}
 {{super()}}
@@ -12,7 +12,7 @@
     {{super()}}
     <link rel="stylesheet" type="text/css"
           href="{{url_for('static', filename='css/style.css')}}">
-
+<link rel="icon" type="image/jpg" href="{{url_for('static', filename='icon/favicon.png')}}">
 
 {% endblock %}
 
@@ -20,4 +20,6 @@
     <div class="navbar navbar-fixed-top">
     </div>
     {% endblock %}
+
+    
 
