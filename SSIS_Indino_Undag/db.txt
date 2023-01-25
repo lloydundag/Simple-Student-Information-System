@@ -66,7 +66,7 @@ INSERT INTO courses (name) VALUES
 ('BS in Computer Engineering'),
 ('BS in Electronics & Communications Engineering'),
 ('BS in Electrical Engineering'),
-('BS in Mining Eng''g.'),
+('BS in Mining Engineering.'),
 ('BS in Environmental Engineering Technology'),
 ('BS in Mechanical Engineering'),
 ('BS in Metallurgical Engineering'),
