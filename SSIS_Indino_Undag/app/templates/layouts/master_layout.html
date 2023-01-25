@@ -1,25 +1,231 @@
-{%- extends "bootstrap/base.html" %}
-{% block title %}{{ title }}{% endblock %}
+/*!
+ * Start Bootstrap - Freelancer v3.3.7+1 (http://startbootstrap.com/template-overviews/freelancer)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+body {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  background-color:#590004;
+}
 
-{% block metas %}
-{% endblock %}
-{% block head %}
-{{super()}}
 
-{%- endblock %}
+#h1{
+  position:relative;
+  left:500px;
+  }
 
-{% block styles -%}
-    {{super()}}
-    <link rel="stylesheet" type="text/css"
-          href="{{url_for('static', filename='css/style.css')}}">
-<link rel="icon" type="image/jpg" href="{{url_for('static', filename='icon/favicon.png')}}">
 
-{% endblock %}
+#s1 {
+  background-color:#38040E; 
+}
 
-    {% block navbar %}
-    <div class="navbar navbar-fixed-top">
-    </div>
-    {% endblock %}
 
-    
 
+p1 {
+  font-size: 16px;
+  color: White;
+}
+
+table {
+  width: 75%;
+  color:white;
+}
+
+th {
+  text-align: center;
+  background-color: #FCBA04;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color:#250001;
+}
+
+.button {
+  background-color: #FCBA04; 
+  border: none;
+  color: #250001;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12x;
+  border-radius: 12px;
+}
+
+td {
+  text-align: center;
+}
+
+p {
+  font-size: 20px;
+  color: black;
+}
+
+p.small {
+  font-size: 16px;
+  color: black;
+}
+
+
+input { text-align: center;
+color:black;
+}
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  
+}
+.img-centered {
+  margin: 0 auto;
+}
+header {
+  text-align: center;
+  color: white;
+}
+header .container {
+  padding-top: 100px;
+  padding-bottom: 50px;
+  width: 30%;
+}
+header img {
+  display: block;
+  margin: 0 auto 20px;
+}
+header .intro-text .name {
+  display: block;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 2em;
+}
+header .intro-text .tag-line {
+  font-size: 1.25em;
+  font-weight: 300;
+}
+@media (min-width: 768px) {
+  header .container {
+/*     padding-top: 200px; */
+    padding-bottom: 100px;
+  }
+  header .intro-text .name {
+    font-size: 4.75em;
+  }
+  header .intro-text .tag-line {
+    font-size: 1.75em;
+  }
+}
+.navbar-custom {
+  background: white;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: none;
+}
+
+.navbar-custom .navbar-nav {
+  letter-spacing: 1px;
+  margin-top: 10px;  
+}
+.navbar-custom .navbar-nav li a{
+  color: white;
+  
+}
+
+footer {
+  color: white;
+}
+footer h3 {
+  margin-bottom: 30px;
+}
+footer .footer-above {
+  padding-top: 50px;
+  background-color: white;
+}
+footer .footer-col {
+  margin-bottom: 50px;
+}
+footer .footer-below {
+  padding: 25px 0;
+  background-color: White;
+}
+
+.error {
+    color: red;
+    font-size: 16px;
+}
+
+
+.user-image {
+  width: 10rem;
+  height: auto;
+  margin: 2rem 3rem;
+  border-radius: 1rem;
+}
+
+.row {
+  color:white;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width:50%;
+  font-size:14px;
+}
+
+
+#wrapper {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+#wrapper .user-image:hover {
+  border: 2px solid lightblue;
+  border-color: white;
+}
+
+/* Flash message container */
+.flashes li{
+  width: 100%;
+  height: auto;
+  background-color: #198754;;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+  border-radius: 0.5rem;
+}
+
+/* Close button */
+.flashes .close-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}
+
+.message {
+  padding: 1rem 1rem;
+}
+
+#image {
+  display: none;
+
+}
+
+.search {
+  width: 36rem !important;
+}
+
+#form-container {
+  text-align: center;
+}
