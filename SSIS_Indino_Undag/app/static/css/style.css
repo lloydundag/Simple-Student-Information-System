@@ -6,13 +6,72 @@
 body {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   overflow-x: hidden;
+  background-color:#590004;
 }
+
+
+#h1{
+  position:relative;
+  left:500px;
+  }
+
+
+#s1 {
+  background-color:#38040E; 
+}
+
+
+
+p1 {
+  font-size: 16px;
+  color: White;
+}
+
+table {
+  width: 75%;
+  color:white;
+}
+
+th {
+  text-align: center;
+  background-color: #FCBA04;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color:#250001;
+}
+
+.button {
+  background-color: #FCBA04; 
+  border: none;
+  color: #250001;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12x;
+  border-radius: 12px;
+}
+
+td {
+  text-align: center;
+}
+
 p {
   font-size: 20px;
+  color: black;
 }
+
 p.small {
   font-size: 16px;
+  color: black;
 }
+
+
+input { text-align: center;
+color:black;
+}
+
+
 
 h1,
 h2,
@@ -23,18 +82,19 @@ h6 {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 700;
+  
 }
 .img-centered {
   margin: 0 auto;
 }
 header {
   text-align: center;
-  background: #154187;
   color: white;
 }
 header .container {
   padding-top: 100px;
   padding-bottom: 50px;
+  width: 30%;
 }
 header img {
   display: block;
@@ -64,7 +124,7 @@ header .intro-text .tag-line {
   }
 }
 .navbar-custom {
-  background: #154187;
+  background: white;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 700;
@@ -88,17 +148,84 @@ footer h3 {
 }
 footer .footer-above {
   padding-top: 50px;
-  background-color: #2C3E50;
+  background-color: white;
 }
 footer .footer-col {
   margin-bottom: 50px;
 }
 footer .footer-below {
   padding: 25px 0;
-  background-color: #233140;
+  background-color: White;
 }
 
 .error {
     color: red;
     font-size: 16px;
+}
+
+
+.user-image {
+  width: 10rem;
+  height: auto;
+  margin: 2rem 3rem;
+  border-radius: 1rem;
+}
+
+.row {
+  color:white;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width:50%;
+  font-size:14px;
+}
+
+
+#wrapper {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+#wrapper .user-image:hover {
+  border: 2px solid lightblue;
+  border-color: white;
+}
+
+/* Flash message container */
+.flashes li{
+  width: 100%;
+  height: auto;
+  background-color: #198754;;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+  border-radius: 0.5rem;
+}
+
+/* Close button */
+.flashes .close-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}
+
+.message {
+  padding: 1rem 1rem;
+}
+
+#image {
+  display: none;
+
+}
+
+.search {
+  width: 36rem !important;
+}
+
+#form-container {
+  text-align: center;
 }
