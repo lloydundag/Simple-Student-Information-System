@@ -51,7 +51,7 @@ CREATE TABLE enrollment (
 );
 
 INSERT INTO colleges (name) 
-VALUES ('College of Computer Studies'), ('College of Education'), ('College of Nursing'), ('College of Economics, Business, and Accountancy'), ('College of Arts and Social Sciences');
+VALUES ('College of Computer Studies'), ('College of Engineering and Technology'), ('College of Science and Mathematics'), ('College of Education'), ('College of Nursing'), ('College of Economics, Business, and Accountancy'), ('College of Arts and Social Sciences');
 
 INSERT INTO courses (name) VALUES 
 ('BA in English'),
