@@ -1,19 +1,23 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {%- extends "layouts/master_layout.html" %}
 {% block content %}
-<div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">
-                    <a href="{{ url_for('.index') }}"></a>
-                </li>
-            </ol>
-        </nav>
+<link rel="icon" type="image/jpg" href="{{url_for('static', filename='icon/favicon.png')}}">
+ <img src="{{url_for('static', filename='icon/bg2.png')}}" style="width:100%">3
+<div class="container" align="center">
+           
+            <br>
+            <br>
         <div class="row">
             <div class="col">
                 {{ wtf.quick_form(form, url_for('.register'), "post", enctype="multipart/form-data", id="enrollform")}}
             </div>
         </div>
 </div>
+
+<br>
+<br>
 <script src="{{ url_for('static',filename='js/signup.js')}}"></script>
+
+<br>
+<br>
 {%- endblock %}
