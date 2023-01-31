@@ -30,3 +30,18 @@ class UserForm(FlaskForm):
     
     submit = SubmitField("Submit")
 
+class UserForm2(FlaskForm):
+
+    lastname = StringField('College Code', [validators.DataRequired(), validators.Length(min=3, max=150)])
+    firstname = StringField('College', [validators.DataRequired(), validators.Length(min=3, max=150)])
+
+    submit = SubmitField("Add College")
+
+
+class UserForm3(FlaskForm):
+
+    lastname = StringField('College Code', [validators.DataRequired(), validators.Length(min=3, max=150)])
+    firstname = StringField('Course', [validators.DataRequired(), validators.Length(min=3, max=150)])
+
+    submit = SubmitField("Add Course")
+
