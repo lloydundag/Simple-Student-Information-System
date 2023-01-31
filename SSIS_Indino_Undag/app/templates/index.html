@@ -1,7 +1,6 @@
 {%- extends "layouts/master_layout.html" %}
 {# Lloyd Kayle L. Undag and Jolandex Indino #}
 {# CSC 181 • SSIS #}
-{# Second Commit #}
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -10,13 +9,17 @@
 {% import "bootstrap/utils.html" as utils %}
 {% block content %}
     
-<img src="{{url_for('static', filename='icon/bg1.png')}}" style="width:100%">
-<br>
-<br>
-<br>
-              <div align="center">
-              <span class="float-center"><a href="{{ url_for('.register') }}" class="button"><b>Enroll a Student</b></a></span>  
+<img src="{{url_for('static', filename='icon/header.png')}}" style="width:100%">
+              <div align="center">  
+                <span class="float-center"><a href="{{ url_for('.course') }}" class="button1"><b>COURSE</b></a></span>  &emsp; &emsp;
+                <span class="float-center"><a href="{{ url_for('.college') }}" class="button1"><b>COLLEGE</b></a></span>  
               </div>
+
+              
+              <img src="{{url_for('static', filename='icon/bg3.png')}}" style="width:100%"> <br> <br> 
+              <div align="center">
+                <span class="float-center"><a href="{{ url_for('.register') }}" class="button"><b>Enroll a Student</b></a></span> 
+               </div>
 
             <div class="container">
               <div class="col">
@@ -94,7 +97,6 @@
 		            </tr>
 		        
 	            </tbody>
-
                 <div id="modalread{{user[0]}}" class="modal fade" style="font-color:black" role="dialog">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -111,11 +113,25 @@
                           <p><b>ID Number:</b>&ensp;{{user[0]}} </p>
                           <p><b>First Name:</b>&ensp;{{user[1]}} </p>
                           <p><b>Last Name:</b>&ensp; {{user[2]}}</p>
-                          <p><b>College:</b>&ensp; {{user[9]}}</p>
-                          <p><b>Course:</b>&ensp;{{user[7]}} </p>
+
+                          {% for college in form.college.choices %}
+                            {% if college[1] == user[9]%}
+
+                          <p><b>College:</b>&ensp; {{user[9]}} ({{college[2]}})</p>
+
+                          {% endif %}
+                          {% endfor %}
+
+                          {% for course in form.course.choices %}
+                            {% if course[1] == user[7]%}
+                            
+                          <p><b>Course:</b>&ensp;{{course[2]}}  <br> ({{user[7]}}) </p>
+                          {% endif %}
+                          {% endfor %}
                           <p><b>Year Level:</b>&ensp; {{user[3]}} </p>
                           <p><b>Gender:</b>&ensp; {{user[4]}} </p>
                           </div>
+
                       <div>
                         <div class="modal-footer">
                           <a href="/{{user[0]}}.pdf" type="button" class="btn btn-primary" >Download</a> 
@@ -170,9 +186,9 @@
                         <select id="course" name="course">
                           {% for course in form.course.choices %}
                             {% if course[1] == user[7]%}
-                              <option value="{{course[0]}}" selected>{{course[1]}}</option>
+                              <option value="{{course[0]}}" selected>{{course[2]}}</option>
                             {% else %}
-                              <option value="{{course[0]}}">{{course[1]}}</option>
+                              <option value="{{course[0]}}">{{course[2]}}</option>
                             {% endif %}
                           {% endfor %}
                           </select>
