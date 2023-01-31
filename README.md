@@ -35,3 +35,11 @@ Set of files added for web app design and functions
 January 30, 2023
 - Undag, Lloyd
 - Indino, Jolandex
+
+---------------
+
+Finalizing repository and editing files for web app design and functions
+January 31, 2023
+- Undag, Lloyd
+- Indino, Jolandex
+
