@@ -13,7 +13,6 @@ flask-reuploaded = "*"
 flask-weasyprint = "*"
 pypdf2 = "*"
 reportlab = "*"
-setuptools = "*"
 
 [dev-packages]
 
