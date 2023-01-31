@@ -1,0 +1,153 @@
+{%- extends "layouts/master_layout.html" %}
+{# Lloyd Kayle L. Undag and Jolandex Indino #}
+{# CSC 181 • SSIS #}
+{# Second Commit #}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+{% import "bootstrap/utils.html" as utils %}
+{% block content %}
+
+<img src="{{url_for('static', filename='icon/header.png')}}" style="width:100%">
+
+              <div align="center">  
+                <span class="float-center"><a href="{{ url_for('.index') }}" class="button1"><b>STUDENT</b></a></span> &emsp; &emsp; 
+                <span class="float-center"><a href="{{ url_for('.course') }}" class="button1"><b>COURSE</b></a></span>  
+              </div>
+
+
+              <img src="{{url_for('static', filename='icon/bg1.png')}}" style="width:100%">
+              <br>
+              <br>
+              <div align="center">  
+                <span class="float-center"><a href="{{ url_for('.coregister') }}" class="button"><b>Create College</b></a></span>  
+              </div>
+                  <br>
+                  <div class="container">
+                    <div class="col">
+                  {% with messages = get_flashed_messages() %}
+                  <div class="message">
+                    {% if messages %}
+                      <ul class=flashes>
+                      {% for message in messages %}
+                      <li>{{ message }} <span class="close-btn" onclick="this.parentElement.remove()">✕</span></li>
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </div>
+                  {% endwith %}
+                </div>
+
+            <div class="container">
+            <table class="table align-center">
+                <thead>
+                <tr>
+                    <th>College Code</th>
+                    <th>College Name</th>
+                    <th>Action</th>
+                </tr>
+	            </thead>
+	            <tbody>
+		        {% for college in data %}
+		            <tr>
+			            <td>{{college[2]}}</td>
+                  <td>{{college[1]}}</td>
+                        <td>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modalread{{college[0]}}">Details</button> 
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#modaledit{{college[0]}}">Edit</button> 
+                            <button class="btn btn-danger btn-delete" data-id="{{college[0]}}">Delete</button>
+                        </td>
+		            </tr>
+
+                <div id="modalread{{college[0]}}" class="modal fade" style="font-color:black" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class = "modal-header">
+    
+                        <h4 class="modal-title" style="color:black"> {{college[1]}} </h4>
+                      </div>
+                    <div class="modal-body">
+      
+                        <div class="form-group" align="center">
+                        <br>
+                        <p><b>College Code:</b>&ensp;{{college[2]}} </p>
+                        <p><b>College Name:</b>&ensp;{{college[1]}} </p>
+
+                        </div>
+                    <div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+		        
+	            </tbody>
+              {% for college in data %}
+              <div id="modaledit{{college[0]}}" class="modal fade" role="dialog" style="font-color:black">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class = "modal-header">
+  
+                      <h4 class="modal-title"> Update Information </h4>
+                    </div>
+  
+                    <div class="modal-body">
+  
+                      <form action="college/edit/{{college[0]}}" method="post" class="form" enctype="multipart/form-data" role="form">
+  
+                      <div class="form-group" align="center">
+                        <br>
+                        <label for="lastname">College Code</label>
+                        <input type ="text" class="form-control" name="lastname" value="{{college[2]}}">
+                        <br>
+                        <br>
+                        <label for="firstname">College Name</label>
+                        <input type ="text" class="form-control" name="firstname" value="{{college[1]}}">
+                        <br>
+                        <br>
+                        <input class="btn btn-default" id="submit" name="submit" type="submit" value="Update"></input>
+                      </div>
+  
+  
+                      <div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button> 
+                          
+                          
+                        </div>
+                    </div>
+                    </form>
+  
+                  
+                  </div>
+                </div>
+                </div>
+                </div>
+              </div>
+                        
+                  </div>
+
+                
+                </div>
+              </div>
+            </div>
+
+
+            {% endfor %}
+            {% endfor %}
+
+        </div>
+    </div>
+{%- endblock %}
+{% block scripts%}
+{{super()}}
+<script>
+    var url = "{{ url_for('.deletec') }}";
+</script>
+<script src="{{ url_for('static',filename='js/index.js')}}"></script>
+
+{% endblock %}
