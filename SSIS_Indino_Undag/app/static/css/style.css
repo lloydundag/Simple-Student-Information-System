@@ -39,12 +39,25 @@ th {
   color:#250001;
 }
 
+.button1 {
+  background-color: #590004; 
+  border: none;
+  color: #ffffff;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 10px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12x;
+  border-radius: 12px;
+}
+
 .button {
   background-color: #FCBA04; 
   border: none;
   color: #250001;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding: 15px 32px;
+  padding: 15px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
