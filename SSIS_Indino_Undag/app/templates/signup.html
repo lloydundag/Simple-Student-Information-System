@@ -2,9 +2,10 @@
 {%- extends "layouts/master_layout.html" %}
 {% block content %}
 <link rel="icon" type="image/jpg" href="{{url_for('static', filename='icon/favicon.png')}}">
- <img src="{{url_for('static', filename='icon/bg2.png')}}" style="width:100%">3
+ <img src="{{url_for('static', filename='icon/bg2.png')}}" style="width:100%">
 <div class="container" align="center">
-           
+<span class="float-center"><a href="{{ url_for('.index') }}" class="button1"><b>HOME</b></a></span>
+  
             <br>
             <br>
         <div class="row">
